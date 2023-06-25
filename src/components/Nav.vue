@@ -23,6 +23,10 @@ const handleLogout = async () => {
 	await userStore.handleLogout()
 }
 
+const goToUsersProfile = () => {
+	router.push(`/profile/${user.value.username}`)
+}
+
 </script>
 
 <template>
@@ -44,7 +48,7 @@ const handleLogout = async () => {
 							<AuthModal :isLogin="true" />
 						</div>
 						<div class="right-content" v-else>
-							<a-button type="primary">Profile</a-button>
+							<a-button type="primary" @click="goToUsersProfile">Profile</a-button>
 							<a-button type="primary" @click="handleLogout">Logout</a-button>
 						</div>
 					</div>

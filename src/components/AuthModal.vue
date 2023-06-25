@@ -61,8 +61,8 @@ const title = props.isLogin ? 'Login' : 'Signup'
 			</template>
 			<div v-if="!loading" class="input-container">
 				<a-input class="input" v-if="!isLogin" v-model:value="userCredentials.username" placeholder="Username" />
-				<a-input class="input" v-model:value="userCredentials.email" placeholder="Email" />
-				<a-input class="input" v-model:value="userCredentials.password" placeholder="Password" type="password" />
+				<a-input class="input" v-model:value="userCredentials.email" placeholder="Email" @keyup.enter="handleOk"/>
+				<a-input class="input" v-model:value="userCredentials.password" placeholder="Password" type="password" @keyup.enter="handleOk"/>
 			</div>
 			<div v-else class="spinner">
 				<a-spin />
