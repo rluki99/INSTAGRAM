@@ -1,57 +1,59 @@
 <script setup>
-import { ref, defineProps } from 'vue'
-import { supabase } from '../supabase'
-import { useUserStore } from '../stores/users'
-import { storeToRefs } from 'pinia'
+import { ref, defineProps } from 'vue';
+import {supabase} from "../supabase"
+import {useUserStore} from "../stores/users"
+import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore()
 
-const { user } = storeToRefs(userStore)
+const {user} = storeToRefs(userStore);
 const props = defineProps(['addNewPost'])
-const loading = ref(false)
-const errorMessage = ref('')
-const visible = ref(false)
-const caption = ref('')
+
+const loading = ref(false);
+const errorMessage = ref("")
+const visible = ref(false);
+const caption = ref("")
 const file = ref(null)
 
 const showModal = () => {
-	visible.value = true
-}
+visible.value = true;
+};
 
-const handleOk = async () => {
-	loading.value = true
-	const fileName = Math.floor(Math.random() * 10000000000000000)
-	let filePath
-	if (file.value) {
-		const { data, error } = await supabase.storage.from('images').upload('public/' + fileName, file.value)
+const handleOk = async () => {;
+    loading.value = true;
+    const fileName = Math.floor(Math.random() * 10000000000000000);
+    let filePath
+    if(file.value){
+        const {data, error} = await supabase.storage.from("images").upload('public/' + fileName, file.value);
 
-		if (error) {
-			loading.value = false
-			return (errorMessage.value = 'Unable to upload image')
-		}
+        if(error) {
+            loading.value = false
+            return errorMessage.value = "Unable to upload image"
+        }
+        
+        filePath = data.path
+        await supabase.from("posts").insert({
+            url: filePath,
+            caption: caption.value,
+            owner_id: user.value.id
+        })
+    }
 
-		filePath = data.path
-		await supabase.from('posts').insert({
-			url: filePath,
-			caption: caption.value,
-			owner_id: user.value.id,
-		})
-	}
-
-	loading.value = false
-	visible.value = false
-	caption.value = ''
-	props.addNewPost({
-		url: filePath,
-		caption: caption.value,
-	})
-}
+    loading.value = false;
+    visible.value = false;
+    caption.value = "";
+    props.addNewPost({
+        url: filePath,
+        caption: caption.value,
+    })
+};
 
 const handleUploadChange = (e) => {
-	if (e.target.files[0]) {
-		file.value = e.target.files[0]
-	}
+    if(e.target.files[0]){
+        file.value = e.target.files[0]
+    }
 }
+
 </script>
 
 <template>
@@ -60,7 +62,9 @@ const handleUploadChange = (e) => {
 		<a-modal v-model:visible="visible" title="Upload Photo" @ok="handleOk">
 			<div v-if="!loading">
 				<input type="file" accept=".jpeg,.png,.jpg" @change="handleUploadChange" />
-				<a-input v-model="caption" placeholder="Caption..." :maxLength="50" />
+				<a-input v-model:value="caption" 
+                placeholder="Caption..."
+                :maxLength="50" />
 				<a-typography-text v-if="errorMessage" type="danger">{{ errorMessage }}</a-typography-text>
 			</div>
 			<div v-else class="spinner">
