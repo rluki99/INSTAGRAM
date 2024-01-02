@@ -1,5 +1,7 @@
 # Instagram Clone
 
+<img src="https://github.com/rluki99/INSTAGRAM/assets/120097849/869d6aa0-5dae-4944-946b-bbe5181aafa5" width="800px" alt="obraz">
+
 ## Project Description
 
 The Instagram clone project aims to replicate some of the core functionalities of the popular social media platform. While it doesn't include all the features present in the original application, it serves as a minimal viable product (MVP) that focuses on key functionalities.
@@ -19,8 +21,10 @@ Please note that certain features commonly found in Instagram, such as chat, lik
 
 To explore the full functionality of the application, you can use the following demo accounts to log in:
 
-1. Email: ---@gmail.com / Password: ---
-2. Email: ---@gmail.com / Password: ---
+1. Email: lukas@test.com / Password: test123 / Username: lukas
+2. Email: steve@test.com / Password: test123 / Username: stevetheguy
+
+#### **LIVE:** https://instagram-blush-sigma.vercel.app/
 
 Feel free to log in using any of these accounts to navigate the app and explore its features.
 
@@ -30,7 +34,11 @@ Feel free to log in using any of these accounts to navigate the app and explore 
 
 The project incorporates the following technologies:
 
-- Vue 3 (Frontend Framework)
+- Vue 3 (Frontend Framework) Composition API
+- Vue Router
+- Pinia
+- Ant-Design-Vue (UI Components)
+- Vite
 - Supabase (Backend-as-a-Service)
 - HTML, CSS, JavaScript (Frontend Development)
 - Git (Version Control)
