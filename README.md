@@ -24,7 +24,7 @@ To explore the full functionality of the application, you can use the following 
 1. Email: lukas@test.com / Password: test123 / Username: lukas
 2. Email: steve@test.com / Password: test123 / Username: stevetheguy
 
-#### **LIVE:** https://instagram-blush-sigma.vercel.app/
+#### **LIVE:** https://instagram-rluki99.vercel.app/
 
 Feel free to log in using any of these accounts to navigate the app and explore its features.
 
